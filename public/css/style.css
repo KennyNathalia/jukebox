@@ -1,0 +1,56 @@
+body {
+    background-color: rgb(66, 64, 64);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+ul {
+    list-style-type: none;
+    display: inline-block;
+    padding-left: 50px;
+}
+
+img {
+    border-radius: 8px;
+    width: 250px;
+}
+
+.songDetail{
+    background-color: rgb(95, 94, 94);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.addSong{
+    margin-left: 200px;
+}
+
+.queueButtons{
+    margin-left: 418px;
+    margin-bottom: 20px;
+}
+
+.top {
+    --offset: 50px; 
+    
+    position: sticky;
+    bottom: 20px;      
+    margin-left: 1100px;
+    margin-top: calc(100vh + var(--offset));
+    
+    /* visual styling */
+    text-decoration: none;
+    padding: 10px;
+    font-family: sans-serif;
+    color: #fff;
+    background: #000;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.checkbox{
+    margin-left: 230px;
+}
+
