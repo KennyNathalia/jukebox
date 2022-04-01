@@ -24,11 +24,11 @@ class PlaylistController extends Controller
     public function create(Request $request){      
         //validates the request  
         $this->validate(request(), [
-            'playlistname' => 'required',  
+            'playlistName' => 'required',  
         ]);
         
         //gets the playlist name and retrieves the user id
-        $pname = $request->input('playlistname');
+        $pname = $request->input('playlistName');
         $user_id = $request->user()->id;
 
         //gets the songs from the request
@@ -79,17 +79,15 @@ class PlaylistController extends Controller
     }
 
     public function newName(Request $request){
+        //validates the request
         $this->validate(request(), [
-            'playlistname' => 'required',
+            'playlistName' => 'required',
             
         ]);
-        $result = Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->get();
-        if ($result->isEmpty()) { 
-            return back()->with('error', 'You need to fill the field first');
-        } else{
-            Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->update(['name' => $request->input('playlistname')]);  
-            return redirect('/playlist');
-        }
+
+        Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->update(['name' => $request->input('playlistName')]);
+
+        return redirect('/playlist');
         
     }
 

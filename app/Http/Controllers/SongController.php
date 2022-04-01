@@ -11,15 +11,9 @@ use App\Classes\Playlist;
 
 class SongController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //$songs = DB::table('songs')->get();
-
+        //gets all songs
         $songs = Song::get();
         
         return view('home', ['songs' => $songs]);
@@ -28,63 +22,15 @@ class SongController extends Controller
 
     public function songDetail($id)
     {
+        //gets the id of a song
         $songs = Song::findOrFail($id);
         
         return view('song_detail', ['songs' => $songs]);
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update()
+    //shows specific songs depending on which genre the user choses on the home page
     {
         if($_GET['sort'] == "all"){
             return redirect('/');
@@ -129,19 +75,5 @@ class SongController extends Controller
                 'songs' => $songs
             ]);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-        
-    
+    }    
 }
