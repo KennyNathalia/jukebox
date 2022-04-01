@@ -17,7 +17,6 @@
 
 @section('content')
 <div class="">
-    <a class="btn btn-success d-flex justify-content-center" href="/playlist/addsong/{{$playlist->id}}">Add song</a>
     <div class="row text-white">
         @foreach($playlist->songs as $song)                        
             <div class="col-4">
@@ -32,6 +31,28 @@
             </div>       
         @endforeach
     </div>
+</div>
+
+<div>    
+    <hr>
+    <p>Add a song!</p>
+</div>
+
+
+<div>
+    @foreach($songs as $song)
+        <ul>
+            <div class="songDetail text-white">
+            <img src={{$song->img}}>
+                
+                <li class="font-weight-bold mt-2">{{$song->name}}</li>
+                <li>{{$song->artist}}</li>
+                <li>{{$song->duration}}</li>
+                <li>{{$song->genre}}</li> 
+                <li><a class="btn btn-success" href="/playlist/addsong/to/playlist/{{$playlist->id}}/{{$song->id}} ">Add this song</a></li>
+            </div>
+        </ul>
+    @endforeach   
 </div>
 
 @stop

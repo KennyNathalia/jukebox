@@ -93,8 +93,9 @@ class PlaylistController extends Controller
     public function detail($id){
         //gets the playlist id
         $playlist = Playlist::findOrFail($id);
+        $songs = Song::get();
 
-        return view('playlist_detail', ['playlist' => $playlist]);
+        return view('playlist_detail', ['playlist' => $playlist], ['songs' => $songs]);
     }
 
 
@@ -115,19 +116,23 @@ class PlaylistController extends Controller
         return view('playlist_addsong', ['songs' => $songs]);
     }
 
-    public function addSongToPlaylist(Request $request, $id){
-        // $this->validate(request(), [
-        //     'playlistname' => 'required',
+    public function addSongToPlaylist($id, $songId){
+        // // $this->validate(request(), [
+        // //     'playlistname' => 'required',
             
-        // ]);
+        // // ]);
 
-        $playlist = Playlist::where('id',$id);
+        // $playlist = Playlist::where('id',$id);
 
-        $songs = $request->input('song');
+        // $songs = $request->input('song');
 
-        //dd($songs);
+        // //dd($songs);
 
-        $playlist->songs()->attach($songs);
+        // $playlist->songs()->attach($songs);
+
+        // return redirect('/playlist');
+        $playlist = Playlist::find($id);
+        $playlist->songs()->attach($songId);
 
         return redirect('/playlist');
     }
