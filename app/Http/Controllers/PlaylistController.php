@@ -46,7 +46,10 @@ class PlaylistController extends Controller
     }
 
     public function save(Request $request){
+        //Automatically makes a name for the playlist based on the date
         $name = date('Y-m-d H:i:s').'_Queue';
+
+        //counts the songs that were in the session
         $totalsongs = count(session('songqueue'));
         $user_id = $request->user()->id;
 
@@ -109,28 +112,8 @@ class PlaylistController extends Controller
         return redirect('/playlist');
     }
 
-    public function addSong($id){
-        //$playlist = Playlist::findOrFail($id);
-        $songs = Song::get();
-
-        return view('playlist_addsong', ['songs' => $songs]);
-    }
-
     public function addSongToPlaylist($id, $songId){
-        // // $this->validate(request(), [
-        // //     'playlistname' => 'required',
-            
-        // // ]);
-
-        // $playlist = Playlist::where('id',$id);
-
-        // $songs = $request->input('song');
-
-        // //dd($songs);
-
-        // $playlist->songs()->attach($songs);
-
-        // return redirect('/playlist');
+        //gets playlist id and attaches the chosen song to the playlist
         $playlist = Playlist::find($id);
         $playlist->songs()->attach($songId);
 
@@ -138,6 +121,7 @@ class PlaylistController extends Controller
     }
 
     public function removeSong($id, $songId){
+        //gets playlist id and detaches the chosen song to the playlist
         $playlist = Playlist::find($id);
         $playlist->songs()->detach($songId);
 
