@@ -4,7 +4,7 @@
 
 @section('navbar')
     @parent
-    <h1 class="d-flex justify-content-center mt-2">
+    <h1 id="playlistSongs" class="d-flex justify-content-center mt-2">
         <svg xmlns="http://www.w3.org/2000/svg" color="white" width="35" height="35" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
             <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
             <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
@@ -37,6 +37,7 @@
 <div id="addSong">    
     <hr>
     <p class="text-white text-center">Add a song!</p>
+    <a class="btn btn-secondary d-flex justify-content-center mb-3" href="#playlistSongs">Playlist songs</a>
 </div>
 
 
@@ -50,7 +51,7 @@
                 <li>{{$song->artist}}</li>
                 <li>{{$song->duration}}</li>
                 <li>{{$song->genre}}</li> 
-                <li><a class="btn btn-success" href="/playlist/addsong/to/playlist/{{$playlist->id}}/{{$song->id}} ">Add this song</a></li>
+                <li><a class="btn btn-success mt-2" href="/playlist/addsong/to/playlist/{{$playlist->id}}/{{$song->id}} ">Add this song</a></li>
             </div>
         </ul>
     @endforeach   

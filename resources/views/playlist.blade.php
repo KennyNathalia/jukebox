@@ -41,7 +41,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="playlistName" class="text-white">Create a playlist:</label>
-            <input type="text" class="form-control" id="playlistname" name="playlistname" placeholder="Name">
+            <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Name">
         </div>
 
         <div class="">
@@ -61,7 +61,6 @@
                 <li>{{$song->genre}}</li> 
                 <li>
                     <div class="checkbox">
-                        {{-- <input class="mt-2" type="checkbox" name="{{ $song->name }}" value="{{ $song->id }}" id="check{{ $song->id }}"> --}}
                         <input class="mt-2" type="checkbox" name="song[]" value="{{ $song->id }}" id="check{{ $song->id }}">
                     </div>
                 </li>

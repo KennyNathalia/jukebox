@@ -13,9 +13,9 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="playlistName" class="text-white">Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+            <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Name">
         </div>
-        <button type="submit" class="btn btn-secondary">Make Playlist</button>
+        <button type="submit" class="btn btn-secondary">Edit Playlist</button>
     </form>
 </div>
 
