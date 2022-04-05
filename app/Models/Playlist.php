@@ -12,6 +12,14 @@ class Playlist extends Model
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'id',
+        'name',
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
+
     //gets all songs for the playlist page
     public function songs(){
         return $this->belongsToMany(Song::class, 'playlistsongs','playlist_id', 'song_id');

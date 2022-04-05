@@ -14,6 +14,7 @@
         <div class="form-group">
             <label for="playlistName" class="text-white">Name</label>
             <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Name">
+            <input type="hidden" id="playlist_id" name="playlist_id" value="{{ $playlist_id }}">
         </div>
         <button type="submit" class="btn btn-secondary">Edit Playlist</button>
     </form>

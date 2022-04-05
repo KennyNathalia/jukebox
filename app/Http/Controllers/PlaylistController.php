@@ -15,6 +15,7 @@ class PlaylistController extends Controller
 {
     public function index()
     {
+        //gets the playlists and songs
         $playlists = Playlist::get();
         $songs = Song::get();
         
@@ -31,7 +32,7 @@ class PlaylistController extends Controller
         $pname = $request->input('playlistName');
         $user_id = $request->user()->id;
 
-        //gets the songs from the request
+        //gets the songs from the request 
         $songs = $request->input('song');
         
         //makes and playlist object based on the playlist model
@@ -64,6 +65,7 @@ class PlaylistController extends Controller
 
             $p = $p+1;
         }   
+        
         return $this->playlistName($playlist_id);
 
     }
@@ -84,11 +86,11 @@ class PlaylistController extends Controller
             'playlistName' => 'required',
             
         ]);
-
+        
+        //gets the user and the playlist and updates the playlist name
         Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->update(['name' => $request->input('playlistName')]);
 
-        return redirect('/playlist');
-        
+        return redirect('/playlist');              
     }
 
     public function detail($id){
