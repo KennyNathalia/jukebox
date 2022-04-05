@@ -65,7 +65,7 @@ class PlaylistController extends Controller
 
             $p = $p+1;
         }   
-        
+
         return $this->playlistName($playlist_id);
 
     }
@@ -98,7 +98,7 @@ class PlaylistController extends Controller
         $playlist = Playlist::findOrFail($id);
         $songs = Song::get();
 
-        return view('playlist_detail', ['playlist' => $playlist], ['songs' => $songs]);
+        return view('playlist_detail', ['playlist' => $playlist], ['songs' => $songs], ['playlistTime' => $this->convertTime()]);
     }
 
 
@@ -126,5 +126,28 @@ class PlaylistController extends Controller
         $playlist->songs()->detach($songId);
 
         return redirect('/playlist');
+    }
+
+    public function convertTime(){
+        //variables
+        $minutes = 0;
+        $seconds = 0;
+        $extraMinutes = 0;
+
+        $songPlaylist = Song::get();
+
+        //foreach song in the queue
+        foreach($songPlaylist as $song){
+            //Returns associative array with detailed info about given date/time
+            $convertedTime = date_parse($song->duration);
+            $minutes += $convertedTime['minute'];
+            $seconds += $convertedTime['second'];
+            //int div checks how many times it fits in the first given number
+            $extraMinutes = intdiv($seconds, 60);
+            $minutes += $extraMinutes;
+            //returns the remaining seconds
+            //100 : 60 = 40 because 60 can only fit in once in 100
+            $seconds = $seconds % 60;
+        }
     }
 }
