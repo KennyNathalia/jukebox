@@ -20,11 +20,13 @@ class QueueController extends Controller
     }
 
     public function clearQueue(){
+        //clears queue
         session()->forget('songqueue');
         return redirect('/queue'); 
     }
 
     public function removeSong($id){
+        //removes song
         $playlist = new Playlist();
         $playlist->removeSong($id);
         return redirect('/queue');
@@ -59,11 +61,14 @@ class QueueController extends Controller
             $seconds = $seconds % 60;
             
         }
+
+        //returns minutes and seconds
         $time = [ 'minute' => $minutes,'second' => $seconds];
         return $time;
     }
 
     public function queue(){
+        //returns view and total time of the queue
         return view('queue', [
             'queue' => session('songqueue'),
             'queueTime' => $this->convertTime()
