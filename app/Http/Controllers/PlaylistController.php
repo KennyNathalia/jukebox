@@ -98,9 +98,11 @@ class PlaylistController extends Controller
         $playlist = Playlist::findOrFail($id);
         $songs = Song::get();
 
-        return view('playlist_detail', ['playlist' => $playlist], ['songs' => $songs], ['playlistTime' => $this->convertTime()]);
+        return view('playlist_detail', ['playlist' => $playlist], 
+            ['songs' => $songs], 
+            ['playlistTime' => $this->convertTime()]
+        );
     }
-
 
     public function delete($id){
         //deletes the Playlist
@@ -128,16 +130,17 @@ class PlaylistController extends Controller
         return redirect('/playlist');
     }
 
-    public function convertTime(){
+    public function convertTime($playlist_id){
         //variables
         $minutes = 0;
         $seconds = 0;
         $extraMinutes = 0;
 
-        $songPlaylist = Song::get();
+        //$songInPlaylist = Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id);
+        $songsInPlaylist = PlaylistSong::where('playlist_id', $playlist_id)->where('song_id', $songs);
 
         //foreach song in the queue
-        foreach($songPlaylist as $song){
+        foreach($songInPlaylist as $song){
             //Returns associative array with detailed info about given date/time
             $convertedTime = date_parse($song->duration);
             $minutes += $convertedTime['minute'];
