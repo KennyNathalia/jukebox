@@ -16,8 +16,7 @@ class SongController extends Controller
         //gets all songs
         $songs = Song::get();
         
-        return view('home', ['songs' => $songs]);
-        
+        return view('home', ['songs' => $songs]); 
     }
 
     public function songDetail($id)

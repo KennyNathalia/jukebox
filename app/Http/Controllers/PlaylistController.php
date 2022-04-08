@@ -100,7 +100,7 @@ class PlaylistController extends Controller
 
         return view('playlist_detail', ['playlist' => $playlist], 
             ['songs' => $songs], 
-            ['playlistTime' => $this->convertTime()]
+            ['playlistTime' => $this->convertTime($id, $songs)],
         );
     }
 
@@ -130,17 +130,17 @@ class PlaylistController extends Controller
         return redirect('/playlist');
     }
 
-    public function convertTime($playlist_id){
+    public function convertTime($id, $songs){
         //variables
         $minutes = 0;
         $seconds = 0;
         $extraMinutes = 0;
 
-        //$songInPlaylist = Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id);
-        $songsInPlaylist = PlaylistSong::where('playlist_id', $playlist_id)->where('song_id', $songs);
-
+        //$songsInPlaylist = PlaylistSong::where('song_id', $songs);
+        $songsInPlaylist = PlaylistSong::where('playlist_id', $id)->where('song_id', $songs);
+        
         //foreach song in the queue
-        foreach($songInPlaylist as $song){
+        foreach($songsInPlaylist as $song){
             //Returns associative array with detailed info about given date/time
             $convertedTime = date_parse($song->duration);
             $minutes += $convertedTime['minute'];
