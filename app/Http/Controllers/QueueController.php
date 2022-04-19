@@ -20,7 +20,7 @@ class QueueController extends Controller
     }
 
     public function clearQueue(){
-        //clears queue
+        //clears queue by forgetting the queue
         session()->forget('songqueue');
         return redirect('/queue'); 
     }
