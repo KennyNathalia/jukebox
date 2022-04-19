@@ -97,7 +97,7 @@ class PlaylistController extends Controller
         $songs = Song::get();
         $playlistTime = $this->convertTime($id, $songs);
 
-        var_dump($playlistTime);
+        var_dump($playlistTime);        
 
         return view('playlist_detail', 
             ['playlist' => $playlist], 
