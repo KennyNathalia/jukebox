@@ -10,7 +10,6 @@ use App\Models\Genre;
 use Validator;
 use Auth;
 
-
 class PlaylistController extends Controller
 {
     public function index()
@@ -67,7 +66,6 @@ class PlaylistController extends Controller
         }   
 
         return $this->playlistName($playlist_id);
-
     }
 
     public function playlistName($id){
@@ -77,7 +75,6 @@ class PlaylistController extends Controller
             'playlist_id' => $id,
             'name' => $name,
         ]);
-       
     }
 
     public function newName(Request $request){
@@ -90,6 +87,7 @@ class PlaylistController extends Controller
         //gets the user and the playlist and updates the playlist name
         Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->update(['name' => $request->input('playlistName')]);
 
+
         return redirect('/playlist');              
     }
 
@@ -97,10 +95,14 @@ class PlaylistController extends Controller
         //gets the playlist id
         $playlist = Playlist::findOrFail($id);
         $songs = Song::get();
+        $playlistTime = $this->convertTime($id, $songs);
 
-        return view('playlist_detail', ['playlist' => $playlist], 
+        var_dump($playlistTime);
+
+        return view('playlist_detail', 
+            ['playlist' => $playlist], 
             ['songs' => $songs], 
-            ['playlistTime' => $this->convertTime($id, $songs)],
+            ['playlistTime' => $playlistTime],
         );
     }
 
@@ -136,9 +138,11 @@ class PlaylistController extends Controller
         $seconds = 0;
         $extraMinutes = 0;
 
-        //$songsInPlaylist = PlaylistSong::where('song_id', $songs);
+        //$songsInPlaylist = PlaylistSong::get();
         $songsInPlaylist = PlaylistSong::where('playlist_id', $id)->where('song_id', $songs);
-        
+    
+        //var_dump($songsInPlaylist);
+
         //foreach song in the queue
         foreach($songsInPlaylist as $song){
             //Returns associative array with detailed info about given date/time
@@ -152,5 +156,8 @@ class PlaylistController extends Controller
             //100 : 60 = 40 because 60 can only fit in once in 100
             $seconds = $seconds % 60;
         }
+
+        $time = [ 'minute' => $minutes,'second' => $seconds];
+        return $time;
     }
 }

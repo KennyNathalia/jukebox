@@ -17,20 +17,20 @@
 
 @section('content')
 <div class="">
-    <h3 class="text-center text-white">Total length: {{$playlist['minute']. ' minutes and ' . $playlist['second']. ' seconds'}}</h3>
+    <h3 class="text-center text-white">Total length: {{var_dump($playlistTime['minute']). ' minutes and ' . $playlist['second']. ' seconds'}}</h3>
     <a class="btn btn-success d-flex justify-content-center" href="#addSong">Add song</a>
     <div class="row text-white">
         @foreach($playlist->songs as $song)                        
             <div class="col-4">
                 <div class="songDetail mt-2 pl-5">
                     <img src="{{$song->img}}" class="mt-2 mb-2">
-                        <h3>{{ $song->artist }} </h3>
-                        <p>{{ $song->name }}</p>
+                        <h3>{{$song->artist }} </h3>
+                        <p>{{$song->name }}</p>
                         <p>{{$song->duration}}</p>
-                        <p>{{ $song->genre }}</p>
+                        <p>{{$song->genre }}</p>
                         <a class="btn btn-danger" href="/playlist/remove/{{$playlist->id}}/{{$song->id}}">Remove this song</a>                                            
                 </div>
-            </div>       
+            </div>
         @endforeach
     </div>
 </div>

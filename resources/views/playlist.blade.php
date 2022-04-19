@@ -41,7 +41,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="playlistName" class="text-white">Create a playlist:</label>
-            <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Name">
+            <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Name" required>
         </div>
 
         <div class="">
