@@ -17,7 +17,7 @@
 
 @section('content')
 <div class="">
-    <h3 class="text-center text-white">Total length: {{var_dump($playlistTime['minute']). ' minutes and ' . $playlist['second']. ' seconds'}}</h3>
+    <h3 class="text-center text-white">Total length: {{$playlistTime['minute']. ' minutes and ' . $playlistTime['second']. ' seconds'}}</h3>
     <a class="btn btn-success d-flex justify-content-center" href="#addSong">Add song</a>
     <div class="row text-white">
         @foreach($playlist->songs as $song)                        
