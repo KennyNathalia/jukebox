@@ -87,7 +87,6 @@ class PlaylistController extends Controller
         //gets the user and the playlist and updates the playlist name
         Playlist::where('user_id', $request->user()->id)->where('id', $request->playlist_id)->update(['name' => $request->input('playlistName')]);
 
-
         return redirect('/playlist');              
     }
 
@@ -97,13 +96,13 @@ class PlaylistController extends Controller
         $songs = Song::get();
         $playlistTime = $this->convertTime($id, $songs);
 
-        var_dump($playlistTime);        
+        //var_dump($playlistTime);
 
-        return view('playlist_detail', 
-            ['playlist' => $playlist], 
-            ['songs' => $songs], 
-            ['playlistTime' => $playlistTime],
-        );
+        return view('playlist_detail', [
+            'playlist' => $playlist,
+            'songs' => $songs,
+            'playlistTime' => $playlistTime
+        ]);
     }
 
     public function delete($id){
