@@ -24,7 +24,7 @@
             <div class="col-4">
                 <div class="songDetail mt-2 pl-5">
                     <img src="{{$song->img}}" class="mt-2 mb-2">
-                        <h3>{{$song->artist }} </h3>
+                        <h3>{{$song->artist}}</h3>
                         <p>{{$song->name }}</p>
                         <p>{{$song->duration}}</p>
                         <p>{{$song->genre }}</p>
@@ -41,13 +41,11 @@
     <a class="btn btn-secondary d-flex justify-content-center mb-3" href="#playlistSongs">Playlist songs</a>
 </div>
 
-
 <div>
     @foreach($songs as $song)
         <ul>
             <div class="songDetail text-white">
             <img src={{$song->img}}>
-                
                 <li class="font-weight-bold mt-2">{{$song->name}}</li>
                 <li>{{$song->artist}}</li>
                 <li>{{$song->duration}}</li>

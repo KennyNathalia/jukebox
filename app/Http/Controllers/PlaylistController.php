@@ -9,6 +9,7 @@ use App\Models\Song;
 use App\Models\Genre;
 use Validator;
 use Auth;
+use DB;
 
 class PlaylistController extends Controller
 {
@@ -47,12 +48,13 @@ class PlaylistController extends Controller
 
     public function save(Request $request){
         //Automatically makes a name for the playlist based on the date
-        $name = date('Y-m-d H:i:s').'_Queue';
+        $name = date('Y-m-d H:i:s');
 
         //counts the songs that were in the session
         $totalsongs = count(session('songqueue'));
         $user_id = $request->user()->id;
 
+        //fills in the given name and the user_id column
         $playlist_id = Playlist::insertGetId(
             ['name' => $name, 'user_id' => $user_id]
         );
@@ -91,10 +93,10 @@ class PlaylistController extends Controller
     }
 
     public function detail($id){
-        //gets the playlist id
+        //gets the playlist id and the songs within
         $playlist = Playlist::findOrFail($id);
         $songs = Song::get();
-        $playlistTime = $this->convertTime($id, $songs);
+        $playlistTime = $this->convertTime();
 
         //var_dump($playlistTime);
 
@@ -131,16 +133,19 @@ class PlaylistController extends Controller
         return redirect('/playlist');
     }
 
-    public function convertTime($id, $songs){
+    public function convertTime(){
         //variables
         $minutes = 0;
         $seconds = 0;
         $extraMinutes = 0;
 
-        //$songsInPlaylist = PlaylistSong::get();
-        $songsInPlaylist = PlaylistSong::where('playlist_id', $id)->where('song_id', $songs);
+        $songsInPlaylist = PlaylistSong::select('*')->join('songs', 'songs.id', '=', 'playlistsongs.song_id')->get();
+
+        // $songsInPlaylist = DB::table('playlistsongs')->join('songs', 'playlistsongs.song_id', '=', 'songs.id')
+        // ->join('playlists', 'playlistsongs.playlist_id', '=', 'playlists.id')
+        // ->select('playlistsongs.*', 'songs.*', 'playlists.*')->get();
     
-        //var_dump($songsInPlaylist);
+        //dd($songsInPlaylist);
 
         //foreach song in the queue
         foreach($songsInPlaylist as $song){
@@ -156,6 +161,7 @@ class PlaylistController extends Controller
             $seconds = $seconds % 60;
         }
 
+        //returns the time in minutes and seconds
         $time = [ 'minute' => $minutes,'second' => $seconds];
         return $time;
     }
