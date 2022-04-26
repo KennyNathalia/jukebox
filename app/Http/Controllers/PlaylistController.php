@@ -93,12 +93,11 @@ class PlaylistController extends Controller
     }
 
     public function detail($id){
-        //gets the playlist id and the songs within
+        //gets the playlist id and the songs
+        //also runs the convertTime function
         $playlist = Playlist::findOrFail($id);
         $songs = Song::get();
-        $playlistTime = $this->convertTime();
-
-        //var_dump($playlistTime);
+        $playlistTime = $this->convertTime($id);
 
         return view('playlist_detail', [
             'playlist' => $playlist,
@@ -133,23 +132,25 @@ class PlaylistController extends Controller
         return redirect('/playlist');
     }
 
-    public function convertTime(){
+    public function convertTime($id){
+        //$playlist = Playlist::findOrFail($id);
+
         //variables
         $minutes = 0;
         $seconds = 0;
         $extraMinutes = 0;
 
-        $songsInPlaylist = PlaylistSong::select('*')->join('songs', 'songs.id', '=', 'playlistsongs.song_id')->get();
+        //joins the playlistsongs id and the songs id so it can get the time from the duration table
+        $songsInPlaylist = PlaylistSong::select('*')->join('songs', 'songs.id', '=', 'playlistsongs.song_id')->where('playlist_id', $id)->get();
 
         // $songsInPlaylist = DB::table('playlistsongs')->join('songs', 'playlistsongs.song_id', '=', 'songs.id')
         // ->join('playlists', 'playlistsongs.playlist_id', '=', 'playlists.id')
         // ->select('playlistsongs.*', 'songs.*', 'playlists.*')->get();
-    
-        //dd($songsInPlaylist);
 
         //foreach song in the queue
         foreach($songsInPlaylist as $song){
             //Returns associative array with detailed info about given date/time
+            //gets the info from the duration column in the songs table
             $convertedTime = date_parse($song->duration);
             $minutes += $convertedTime['minute'];
             $seconds += $convertedTime['second'];
