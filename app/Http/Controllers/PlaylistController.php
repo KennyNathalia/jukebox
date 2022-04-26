@@ -133,8 +133,6 @@ class PlaylistController extends Controller
     }
 
     public function convertTime($id){
-        //$playlist = Playlist::findOrFail($id);
-
         //variables
         $minutes = 0;
         $seconds = 0;
@@ -142,10 +140,6 @@ class PlaylistController extends Controller
 
         //joins the playlistsongs id and the songs id so it can get the time from the duration table
         $songsInPlaylist = PlaylistSong::select('*')->join('songs', 'songs.id', '=', 'playlistsongs.song_id')->where('playlist_id', $id)->get();
-
-        // $songsInPlaylist = DB::table('playlistsongs')->join('songs', 'playlistsongs.song_id', '=', 'songs.id')
-        // ->join('playlists', 'playlistsongs.playlist_id', '=', 'playlists.id')
-        // ->select('playlistsongs.*', 'songs.*', 'playlists.*')->get();
 
         //foreach song in the queue
         foreach($songsInPlaylist as $song){

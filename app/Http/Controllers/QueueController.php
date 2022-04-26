@@ -30,7 +30,6 @@ class QueueController extends Controller
         $playlist = new Playlist();
         $playlist->removeSong($id);
         return redirect('/queue');
-    
     }
 
     public function convertTime(){
@@ -45,7 +44,6 @@ class QueueController extends Controller
         }else{
             $songQueue = session();
         }
-        //$songQueue = session('songqueue');
 
         //foreach song in the queue
         foreach($songQueue as $song){

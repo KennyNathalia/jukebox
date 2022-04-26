@@ -19,7 +19,6 @@
     <div class="queueButtons">
         <a class="btn btn-secondary" href="/playlist/save" role="button">Save this queue</a>
         <a class="btn btn-secondary" href="/queue/clear" role="button">Clear Queue</a>
-
     </div>
 
     @if($queue != null)
@@ -33,7 +32,6 @@
     <ul>    
         <div class="songDetail text-white">
         <img src={{$song->img}}>
-            
             <li class="font-weight-bold mt-2">{{$song->name}}</li>
             <li>{{$song->artist}}</li>
             <li>{{$song->duration}}</li>

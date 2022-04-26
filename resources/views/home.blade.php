@@ -4,7 +4,6 @@
 
 @section('navbar')
     @parent
-
     <h1 class="d-flex justify-content-center mt-2">
         <svg color="white" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-boombox-fill" viewBox="0 0 16 16">
             <path d="M14.5.5a.5.5 0 0 0-1 0V2H1a1 1 0 0 0-1 1v2h16V3a1 1 0 0 0-1-1h-.5V.5ZM2.5 4a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Zm2 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Zm7.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1.5.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Zm-7-1h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm-2 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm.5-1.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm6.5 1.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm0-1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"/>
@@ -23,6 +22,7 @@
                     <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
                     <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
                   </svg>
+
                 <select class="" name="sort">
                     <option value="all">All</option> 
                     <option value="pop">Pop</option> 
@@ -33,17 +33,13 @@
                 </select>
             <input type="submit" value="Go!">
         </form>
-
     </div>
-
     
     @foreach($songs as $key => $data)
     <ul>    
         <div class="songDetail text-white">
         <img src={{$data->img}}>
-            
             <li class="font-weight-bold mt-2"><a class="text-white" href="/song/detail/{{$data->id}}">{{$data->name}}</a></li>
-            
             <li>{{$data->artist}}</li>
             <li>{{$data->duration}}</li>
             <li>{{$data->genre}}</li> 

@@ -19,7 +19,6 @@
                 @auth
                     <a class="nav-link text-white" href="{{ route('logout') }}">Logout</a>
                 @endauth
-                
             </nav>
         @show
 
