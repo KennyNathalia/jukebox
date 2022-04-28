@@ -25,10 +25,6 @@ Route::get('/home/soul', [SongController::class, 'update']);
 
 Route::get('/song/detail/{id}', [SongController::class, 'songDetail']);
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 Route::get('/queue', [App\Http\Controllers\QueueController::class, 'queue'])->name('queue');
 
 Route::get('/queue/add/{id}', [App\Http\Controllers\QueueController::class, 'addSong'])->name('addSong');
@@ -43,8 +39,6 @@ Route::get('/genre', function () {
     return view('genre', ['genre' => $genre]);
 });
 
-
-
 Route::get('/playlist', [App\Http\Controllers\PlaylistController::class, 'index']);
 
 Route::group(['middleware' => ['auth']], function() {
@@ -56,7 +50,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/playlist/delete/{id}', [App\Http\Controllers\PlaylistController::class, 'delete']);
     Route::get('/playlist/editName/{id}', [App\Http\Controllers\PlaylistController::class, 'playlistName']);
     Route::get('/playlist/remove/{id}/{songId}', [App\Http\Controllers\PlaylistController::class, 'removeSong']);
-    Route::get('/playlist/addsong/{id}', [App\Http\Controllers\PlaylistController::class, 'addSong']);
 });
 
 Route::get('/login', function () {
@@ -67,13 +60,6 @@ Route::get('/register', function () {
     return view('register');
 });
 
-
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('/');
 
 Auth::routes();
-
-// Route::get('/home', function () {
-//     $songs = DB::table('songs')->get();
-    
-//     return view('home', ['songs' => $songs]);
-// });

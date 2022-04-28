@@ -60,7 +60,8 @@ class PlaylistController extends Controller
         );
 
         $p=0;
-
+        
+        //makes the playlist
         for ($x = 0; $x < $totalsongs; $x++) {
             PlaylistSong::create(['playlist_id' => $playlist_id, 'song_id' => session('songqueue')[$p]['id']]);
 
