@@ -56,4 +56,6 @@
     @endforeach   
 </div>
 
+<a href="#" class="top">Back to Top &#8593;</a>
+
 @stop
