@@ -7,7 +7,6 @@ use App\Models\Playlist;
 use App\Models\PlaylistSong;
 use App\Models\Song;
 use App\Models\Genre;
-use Validator;
 use Auth;
 use DB;
 
