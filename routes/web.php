@@ -19,7 +19,7 @@ Route::get('/', [SongController::class, 'index']);
 
 Route::get('/home', [SongController::class, 'index']);
 
-Route::get('home/genre', [SongController::class, 'update'])->name('home.genre');
+Route::get('home/genre}', [SongController::class, 'update'])->name('home.genre');
 
 Route::get('/home/soul', [SongController::class, 'update']);
 
@@ -32,12 +32,6 @@ Route::get('/queue/add/{id}', [App\Http\Controllers\QueueController::class, 'add
 Route::get('/queue/delete/{id}', [App\Http\Controllers\QueueController::class, 'removeSong'])->name('removeSong');
 
 Route::get('/queue/clear', [App\Http\Controllers\QueueController::class, 'clearQueue'])->name('clearQueue');
-
-Route::get('/genre', function () {
-    $genre = DB::table('genres')->get();
-
-    return view('genre', ['genre' => $genre]);
-});
 
 Route::get('/playlist', [App\Http\Controllers\PlaylistController::class, 'index']);
 

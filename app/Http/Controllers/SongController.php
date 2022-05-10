@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\Song;
 use App\Classes\Playlist;
@@ -36,7 +35,7 @@ class SongController extends Controller
         }
 
         if($_GET['sort'] == "pop"){
-            $songs = DB::table('songs')->where('genre', 'pop')->get();
+            $songs = Song::where('genre', 'pop')->get();
 
             return view('home', [
                 'songs' => $songs
@@ -44,7 +43,7 @@ class SongController extends Controller
         }
 
         if($_GET['sort'] == "hip-hop"){
-            $songs = DB::table('songs')->where('genre', 'hip-hop')->get();
+            $songs = Song::where('genre', 'hip-hop')->get();
 
             return view('home', [
                 'songs' => $songs
@@ -52,7 +51,7 @@ class SongController extends Controller
         }
 
         if($_GET['sort'] == "alternative"){
-            $songs = DB::table('songs')->where('genre', 'alternative')->get();
+            $songs = Song::where('genre', 'alternative')->get();
 
             return view('home', [
                 'songs' => $songs
@@ -60,7 +59,7 @@ class SongController extends Controller
         }
 
         if($_GET['sort'] == "soul"){
-            $songs = DB::table('songs')->where('genre', 'soul')->get();
+            $songs = Song::where('genre', 'soul')->get();
 
             return view('home', [
                 'songs' => $songs
@@ -68,7 +67,7 @@ class SongController extends Controller
         }
 
         if($_GET['sort'] == "r&b"){
-            $songs = DB::table('songs')->where('genre', 'r&b')->get();
+            $songs = Song::where('genre', 'r&b')->get();
 
             return view('home', [
                 'songs' => $songs
