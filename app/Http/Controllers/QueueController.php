@@ -32,13 +32,21 @@ class QueueController extends Controller
         return redirect('/queue');
     }
 
-    public function queue(){
+    public function queue(Request $request){
         $playlist = new Playlist();
         //returns view and total time of the queue
         return view('queue', [
-            'queue' => session('songqueue'),
+            //'queue' => session('songqueue'),
+            'queue' => $playlist->showQueue(),
             'queueTime' => $playlist->convertTime()
         ]);
     }
+
+    // public function showQueue(Request $request, $id)
+    // {
+    //     $value = $request->session()->get('key');
+ 
+    //     //
+    // }
     
 }

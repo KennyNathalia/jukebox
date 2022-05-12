@@ -1,9 +1,14 @@
 <?php 
     
     namespace App\Classes;
-    
+    use Illuminate\Http\Request;
+
     class Playlist{
-        
+        public function showQueue(Request $request, $data)
+        {
+            $data = $request->session()->all('songqueue');
+            //session(['songqueue' => request()->all()]);
+        }
 
         public function addSong($song){
             if (session('songqueue') == null){
