@@ -4,28 +4,39 @@
     use Illuminate\Http\Request;
 
     class Playlist{
-        public function showQueue(Request $request, $data)
-        {
-            $data = $request->session()->all('songqueue');
-            //session(['songqueue' => request()->all()]);
-        }
+        private $sessionSongs;
+        private $request;
 
-        public function addSong($song){
-            if (session('songqueue') == null){
-                session()->put('songqueue', []);
-                session()->push('songqueue', $song);
-            } else {
-                session()->push('songqueue', $song);
+        public function __construct(Request $request){
+            $this->request = $request;
+
+            if ($this->request->session()->has('songQueue')) {
+                $this->sessionSongs = $this->request->session()->get('songQueue');
+            }else{
+                $this->sessionSongs = [];
             }
         }
 
-        public function removeSong($index){
-            if (session('songqueue') != null){
-                session()->forget('songqueue.'.$index);
-            } 
+        public function syncSession(){
+            $this->request->session()->put('songQueue', $this->sessionSongs);
         }
 
-        public function clearQueue(){
+        public function getAllSongs()
+        {   
+            return $this->sessionSongs;
+        }
+
+        public function addSong($songId){
+            
+            syncSession();
+        }
+
+        public function removeSong($songId){
+            
+            syncSession();
+        }
+
+        public function clearPlaylist(){
             session()->forget('songqueue');
         }
 
@@ -41,9 +52,12 @@
             }else{
                 $songQueue = session();
             }
+
+            dd($songQueue);
     
             //foreach song in the queue
             foreach($songQueue as $song){
+                //dd($song);
                 //Returns associative array with detailed info about given date/time
                 $convertedTime = date_parse($song->duration);
                 $minutes += $convertedTime['minute'];
