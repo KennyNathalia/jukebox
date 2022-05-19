@@ -7,39 +7,55 @@
         private $sessionSongs;
         private $request;
 
-        public function __construct(Request $request){
+        //the construct runs when a queue is being made
+        public function ___construct(Request $request){
             $this->request = $request;
 
+            //if the session from the session has songqueue
             if ($this->request->session()->has('songQueue')) {
                 $this->sessionSongs = $this->request->session()->get('songQueue');
             }else{
+                //if not, session songs is an empty array
                 $this->sessionSongs = [];
             }
         }
-
+        
+        //syncs the session
         public function syncSession(){
             $this->request->session()->put('songQueue', $this->sessionSongs);
         }
 
+        //gets all songs from the session and displays them
         public function getAllSongs()
         {   
+            //returns the session songs array
             return $this->sessionSongs;
         }
 
+        //adds song in the session from the home page
         public function addSong($songId){
+            $this->request->session()->push('songQueue', $songId);
             
             syncSession();
         }
 
+        //removes song from the session
         public function removeSong($songId){
+            if ($this->request->session()->has('songQueue') != null){
+                $this->request->session()->forget('songQueue', $songId);
+            }
             
             syncSession();
         }
 
+        //clears the whole playlist
         public function clearPlaylist(){
-            session()->forget('songqueue');
+            $this->request->session()->forget('songQueue');
+
+            syncSession();
         }
 
+        //returns the total time from all the songs in the session
         public function convertTime(){
             //variables
             $minutes = 0;
@@ -47,13 +63,13 @@
             $extraMinutes = 0;
     
             //checks if session exists
-            if(session()->has('songqueue')){
-                $songQueue = session('songqueue');
+            if(session()->has('songQueue')){
+                $songQueue = session('songQueue');
             }else{
                 $songQueue = session();
             }
 
-            dd($songQueue);
+            //dd($songQueue);
     
             //foreach song in the queue
             foreach($songQueue as $song){

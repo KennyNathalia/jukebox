@@ -34,7 +34,7 @@ class QueueController extends Controller
         $playlist = new Playlist();
         //returns view and total time of the queue
         return view('queue', [
-            'queue' => session('songqueue'),
+            'queue' => $playlist->getAllSongs(),
             'queueTime' => $playlist->convertTime()
         ]);
     }
