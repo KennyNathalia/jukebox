@@ -8,7 +8,7 @@
         private $request;
 
         //the construct runs when a queue is being made
-        public function ___construct(Request $request){
+        public function __construct(Request $request){
             $this->request = $request;
 
             //if the session from the session has songqueue
@@ -36,23 +36,23 @@
         public function addSong($songId){
             $this->request->session()->push('songQueue', $songId);
             
-            syncSession();
+            //$this->syncSession();
         }
 
         //removes song from the session
         public function removeSong($songId){
             if ($this->request->session()->has('songQueue') != null){
                 $this->request->session()->forget('songQueue', $songId);
-            }
             
-            syncSession();
+            }
+            //$this->syncSession();
         }
 
         //clears the whole playlist
         public function clearPlaylist(){
             $this->request->session()->forget('songQueue');
 
-            syncSession();
+            //$this->syncSession();
         }
 
         //returns the total time from all the songs in the session

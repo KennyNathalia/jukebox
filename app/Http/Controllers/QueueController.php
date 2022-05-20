@@ -10,34 +10,32 @@ class QueueController extends Controller
 {
     private $playlist;
 
-    public function addSong($id){
+    public function addSong(Request $request, $id){
         $songId = Song::findOrFail($id);
-        $playlist = new Playlist();
+        $playlist = new Playlist($request);
         $playlist->addSong($songId);
         return redirect('/queue');   
     }
 
-    public function clearQueue(){
-        $playlist = new Playlist();
+    public function clearQueue(Request $request){
+        $playlist = new Playlist($request);
         $playlist->clearPlaylist();
         return redirect('/'); 
     }
 
-    public function removeSong($songId){
-        $playlist = new Playlist();
+    public function removeSong(Request $request, $id){
+        $songId = Song::findOrFail($id);
+        $playlist = new Playlist($request);
         $playlist->removeSong($songId);
         return redirect('/queue');
-    
     }
 
-    public function queue(){
-        $playlist = new Playlist();
+    public function queue(Request $request){
+        $playlist = new Playlist($request);
         //returns view and total time of the queue
         return view('queue', [
             'queue' => $playlist->getAllSongs(),
             'queueTime' => $playlist->convertTime()
         ]);
     }
-
-    
 }
