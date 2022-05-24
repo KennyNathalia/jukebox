@@ -23,8 +23,7 @@ class QueueController extends Controller
         return redirect('/'); 
     }
 
-    public function removeSong(Request $request, $id){
-        $songId = Song::findOrFail($id);
+    public function removeSong(Request $request, $songId){
         $playlist = new Playlist($request);
         $playlist->removeSong($songId);
         return redirect('/queue');

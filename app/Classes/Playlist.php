@@ -36,14 +36,13 @@
         public function addSong($songId){
             $this->request->session()->push('songQueue', $songId);
             
-            //$this->syncSession();
+            //syncSession();
         }
 
         //removes song from the session
         public function removeSong($songId){
             if ($this->request->session()->has('songQueue') != null){
                 $this->request->session()->forget('songQueue', $songId);
-            
             }
             //$this->syncSession();
         }
