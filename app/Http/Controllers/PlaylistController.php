@@ -7,11 +7,14 @@ use App\Models\Playlist;
 use App\Models\PlaylistSong;
 use App\Models\Song;
 use App\Models\Genre;
+use App\Classes\SessionManagement;
 use Auth;
 use DB;
 
 class PlaylistController extends Controller
 {
+    private $playlist;
+
     public function index()
     {
         //gets the playlists and songs
@@ -46,11 +49,12 @@ class PlaylistController extends Controller
     }
 
     public function save(Request $request){
+        $playlist = new SessionManagement($request);
         //Automatically makes a name for the playlist based on the date
         $name = date('Y-m-d H:i:s');
 
         //counts the songs that were in the session
-        $totalsongs = count(session('songqueue'));
+        $totalsongs = count($playlist->getAllSongs());
         $user_id = $request->user()->id;
 
         //fills in the given name and the user_id column
@@ -62,7 +66,7 @@ class PlaylistController extends Controller
         
         //makes the playlist
         for ($x = 0; $x < $totalsongs; $x++) {
-            PlaylistSong::create(['playlist_id' => $playlist_id, 'song_id' => session('songqueue')[$p]['id']]);
+            PlaylistSong::create(['playlist_id' => $playlist_id, 'song_id' => $playlist->getAllSongs()[$p]['id']]);
 
             $p = $p+1;
         }   

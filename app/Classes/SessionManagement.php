@@ -3,7 +3,7 @@
     namespace App\Classes;
     use Illuminate\Http\Request;
 
-    class Playlist{
+    class SessionManagement{
         private $sessionSongs;
         private $request;
 
@@ -41,10 +41,11 @@
 
         //removes song from the session
         public function removeSong($songId){
-            if ($this->request->session()->has('songQueue') != null){
-                $this->request->session()->forget('songQueue', $songId);
-            }
-            //$this->syncSession();
+            if ($this->request->session('songQueue') != null){
+                $this->request->session()->forget('songQueue.'.$songId);
+            } 
+            
+            //syncSession();
         }
 
         //clears the whole playlist
