@@ -42,7 +42,7 @@
         //removes song from the session
         public function removeSong($songId){
             if ($this->request->session('songQueue') != null){
-                $this->request->session()->forget('songQueue.'.$songId);
+                $this->request->session()->forget('songQueue.' .$songId);
             } 
             
             //syncSession();
