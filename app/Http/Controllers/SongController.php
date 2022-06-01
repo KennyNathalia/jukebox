@@ -36,42 +36,26 @@ class SongController extends Controller
 
         if($_GET['sort'] == "pop"){
             $songs = Song::where('genre', 'pop')->get();
-
-            return view('home', [
-                'songs' => $songs
-            ]);
         }
 
         if($_GET['sort'] == "hip-hop"){
             $songs = Song::where('genre', 'hip-hop')->get();
-
-            return view('home', [
-                'songs' => $songs
-            ]);
         }
 
         if($_GET['sort'] == "alternative"){
             $songs = Song::where('genre', 'alternative')->get();
-
-            return view('home', [
-                'songs' => $songs
-            ]);
         }
 
         if($_GET['sort'] == "soul"){
             $songs = Song::where('genre', 'soul')->get();
-
-            return view('home', [
-                'songs' => $songs
-            ]);
         }
 
         if($_GET['sort'] == "r&b"){
             $songs = Song::where('genre', 'r&b')->get();
-
-            return view('home', [
-                'songs' => $songs
-            ]);
         }
+
+        return view('home', [
+            'songs' => $songs
+        ]);
     }    
 }

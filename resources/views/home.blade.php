@@ -23,7 +23,7 @@
                     <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
                   </svg>
 
-                <select class="" name="sort">
+                <select class="" name="sort" id="sort">
                     <option value="all">All</option> 
                     <option value="pop">Pop</option> 
                     <option value="hip-hop">Hip-Hop</option>
