@@ -9,7 +9,6 @@ use App\Models\Song;
 use App\Models\Genre;
 use App\Classes\SessionManagement;
 use Auth;
-use DB;
 
 class PlaylistController extends Controller
 {

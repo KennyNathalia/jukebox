@@ -21,8 +21,6 @@ Route::get('/home', [SongController::class, 'index']);
 
 Route::get('home/genre}', [SongController::class, 'update'])->name('home.genre');
 
-Route::get('/home/soul', [SongController::class, 'update']);
-
 Route::get('/song/detail/{id}', [SongController::class, 'songDetail']);
 
 Route::get('/queue', [App\Http\Controllers\QueueController::class, 'queue'])->name('queue');

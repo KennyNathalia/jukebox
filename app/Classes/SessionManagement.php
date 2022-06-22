@@ -84,7 +84,6 @@
                 //returns the remaining seconds
                 //100 : 60 = 40 because 60 can only fit in once in 100
                 $seconds = $seconds % 60;
-                
             }
     
             //returns minutes and seconds

@@ -53,7 +53,7 @@ class SongController extends Controller
         if($_GET['sort'] == "r&b"){
             $songs = Song::where('genre', 'r&b')->get();
         }
-
+ 
         return view('home', [
             'songs' => $songs
         ]);
