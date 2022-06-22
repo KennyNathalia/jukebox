@@ -29,8 +29,6 @@
         @endforeach
     </div>      
 @endif
-   
-
 
 <div class="">
     <form method="post" action="{{ url('/playlist/create') }}">
